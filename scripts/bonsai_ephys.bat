@@ -1,15 +1,13 @@
 @echo off
-REM Bonsai launcher (Ephys-only visualizers)
+REM Bonsai launcher for Ephys-only recording
 REM Update BONSAI_EXE to point to your Bonsai executable.
-REM Place the actual .bonsai script next to this .bat (same folder) or update SCRIPT variable.
+REM This workflow file should be configured for ephys data acquisition.
 
 set "BONSAI_EXE=C:\Program Files\Bonsai\Bonsai.exe"
+set "SCRIPT=%~dp0workflow_ephys.bonsai"
 
-set "SCRIPT=%~dp0bonsai_onix.bonsai"
-
-REM Run Bonsai in headless mode and enable only the Ephys visualizer.
-REM The following flags are placeholders — adjust to match your Bonsai CLI.
-"%BONSAI_EXE%" --headless --script "%SCRIPT%" --visualizer EphysVisualizer
+REM Run Bonsai with ephys-only configuration
+"%BONSAI_EXE%" "%SCRIPT%"
 
 if %ERRORLEVEL% NEQ 0 (
     echo Bonsai exited with error %ERRORLEVEL%

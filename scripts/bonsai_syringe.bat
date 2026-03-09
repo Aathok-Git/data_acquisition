@@ -1,12 +1,12 @@
 @echo off
-REM Bonsai launcher for Miniscope-only imaging
+REM Bonsai launcher for Syringe Use only
 REM Update BONSAI_EXE to point to your Bonsai executable.
-REM This workflow file should be configured for miniscope data acquisition.
+REM This workflow file should be configured for syringe pump control.
 
 set "BONSAI_EXE=C:\Program Files\Bonsai\Bonsai.exe"
-set "SCRIPT=%~dp0workflow_miniscope.bonsai"
+set "SCRIPT=%~dp0workflow_syringe.bonsai"
 
-REM Run Bonsai with miniscope-only configuration
+REM Run Bonsai with syringe configuration
 "%BONSAI_EXE%" "%SCRIPT%"
 
 if %ERRORLEVEL% NEQ 0 (
