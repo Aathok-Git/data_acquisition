@@ -8,7 +8,7 @@ sg.theme('DarkBlue2')
 
 # Bonsai script selection based on module choices
 BASE_DIR = Path(__file__).parent
-_BonsaiScripts = {
+_BonsaiScripts = {  
     (True, False): BASE_DIR / 'scripts' / 'bonsai_ephys.bat',
     (False, True): BASE_DIR / 'scripts' / 'bonsai_miniscope.bat',
     (True, True): BASE_DIR / 'scripts' / 'bonsai_both.bat',
@@ -30,7 +30,9 @@ layout = [
     [sg.Text('ONIX Experiment Selector', font=('Helvetica', 16, 'bold'))],
 
     [sg.Text('Select Modules:', font=('Helvetica', 12, 'bold'))],
-    [sg.Checkbox('Ephys', key='ephys'), sg.Checkbox('Miniscope', key='miniscope')],
+    [sg.Checkbox('Ephys', key='ephys'), sg.Checkbox('Miniscope', key='miniscope'),  sg.Checkbox('Analog Inputs', key='analog_inputs'),
+      sg.Checkbox('Syringe Use', key='syringe_use'),  sg.Checkbox('Behavioral Camera', key='behavioral_camera'), sg.Checkbox('Events', key='events'),
+      sg.Checkbox('Other', key='other')],
 
     [sg.Button('Launch Bonsai'), sg.Button('Exit')],
 
