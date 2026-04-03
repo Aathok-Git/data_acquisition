@@ -8,7 +8,7 @@ sg.theme('DarkBlue2')
 
 # ========== CONFIGURATION ==========
 # Set to True to allow launching Bonsai without a confirmed experiment line (testing only)
-TESTING_MODE_SKIP_EXPERIMENT_CHECK = False
+TESTING_MODE_SKIP_EXPERIMENT_CHECK = True
 # ====================================
 
 BASE_DIR = Path(__file__).parent

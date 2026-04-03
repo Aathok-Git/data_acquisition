@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VisualizerLayout Version="2.9.0">
+  <WindowSettings Index="8">
+    <Visible>false</Visible>
+    <Location>
+      <X>127</X>
+      <Y>304</Y>
+    </Location>
+    <Size>
+      <Width>336</Width>
+      <Height>65</Height>
+    </Size>
+    <VisualizerTypeName>Bonsai.Design.ObjectTextVisualizer</VisualizerTypeName>
+    <VisualizerSettings>
+      <ObjectTextVisualizer />
+    </VisualizerSettings>
+  </WindowSettings>
+  <WindowSettings Index="12">
+    <Visible>false</Visible>
+    <Location>
+      <X>112</X>
+      <Y>237</Y>
+    </Location>
+    <Size>
+      <Width>336</Width>
+      <Height>65</Height>
+    </Size>
+    <VisualizerTypeName>Bonsai.Design.ObjectTextVisualizer</VisualizerTypeName>
+    <VisualizerSettings>
+      <ObjectTextVisualizer />
+    </VisualizerSettings>
+  </WindowSettings>
+  <WindowSettings Index="14">
+    <Visible>false</Visible>
+    <Location>
+      <X>1290</X>
+      <Y>484</Y>
+    </Location>
+    <Size>
+      <Width>336</Width>
+      <Height>82</Height>
+    </Size>
+    <VisualizerTypeName>Bonsai.Design.ObjectTextVisualizer</VisualizerTypeName>
+    <VisualizerSettings>
+      <ObjectTextVisualizer />
+    </VisualizerSettings>
+  </WindowSettings>
+  <WindowSettings Index="18">
+    <NestedLayout>
+      <WindowSettings Index="3">
+        <Location>
+          <X>1407</X>
+          <Y>123</Y>
+        </Location>
+        <Size>
+          <Width>255</Width>
+          <Height>168</Height>
+        </Size>
+        <VisualizerTypeName>Bonsai.Gui.ButtonVisualizer</VisualizerTypeName>
+        <VisualizerSettings>
+          <ButtonVisualizer />
+        </VisualizerSettings>
+      </WindowSettings>
+    </NestedLayout>
+  </WindowSettings>
+  <WindowSettings Index="35">
+    <Location>
+      <X>776</X>
+      <Y>281</Y>
+    </Location>
+    <Size>
+      <Width>461</Width>
+      <Height>384</Height>
+    </Size>
+    <VisualizerTypeName>Bonsai.Gui.GroupBoxVisualizer</VisualizerTypeName>
+    <VisualizerSettings>
+      <GroupBoxVisualizer>
+        <MashupSettings>
+          <Source>23</Source>
+          <VisualizerTypeName>Bonsai.Vision.Design.IplImageVisualizer</VisualizerTypeName>
+          <VisualizerSettings>
+            <IplImageVisualizer />
+          </VisualizerSettings>
+        </MashupSettings>
+      </GroupBoxVisualizer>
+    </VisualizerSettings>
+  </WindowSettings>
+  <WindowSettings Index="43">
+    <NestedLayout>
+      <WindowSettings Index="45">
+        <Location>
+          <X>777</X>
+          <Y>658</Y>
+        </Location>
+        <Size>
+          <Width>461</Width>
+          <Height>134</Height>
+        </Size>
+        <VisualizerTypeName>Bonsai.Gui.GroupBoxVisualizer</VisualizerTypeName>
+        <VisualizerSettings>
+          <GroupBoxVisualizer>
+            <MashupSettings>
+              <Source>41</Source>
+              <VisualizerTypeName>Bonsai.Gui.TableLayoutPanelVisualizer</VisualizerTypeName>
+              <VisualizerSettings>
+                <TableLayoutPanelVisualizer>
+                  <MashupSettings>
+                    <Source>37</Source>
+                    <VisualizerTypeName>Bonsai.Gui.ButtonVisualizer</VisualizerTypeName>
+                    <VisualizerSettings>
+                      <ButtonVisualizer />
+                    </VisualizerSettings>
+                  </MashupSettings>
+                  <MashupSettings>
+                    <Source>19</Source>
+                    <VisualizerTypeName>Bonsai.Gui.TextBoxVisualizer</VisualizerTypeName>
+                    <VisualizerSettings>
+                      <TextBoxVisualizer />
+                    </VisualizerSettings>
+                  </MashupSettings>
+                  <MashupSettings>
+                    <Source>21</Source>
+                    <VisualizerTypeName>Bonsai.Gui.ButtonVisualizer</VisualizerTypeName>
+                    <VisualizerSettings>
+                      <ButtonVisualizer />
+                    </VisualizerSettings>
+                  </MashupSettings>
+                </TableLayoutPanelVisualizer>
+              </VisualizerSettings>
+            </MashupSettings>
+          </GroupBoxVisualizer>
+        </VisualizerSettings>
+      </WindowSettings>
+    </NestedLayout>
+  </WindowSettings>
+</VisualizerLayout>
