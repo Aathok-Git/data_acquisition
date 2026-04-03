@@ -15,6 +15,8 @@ BASE_DIR = Path(__file__).parent
 
 # Global state to track confirmed experiment selection
 _confirmed_experiment_line = None
+_confirmed_rat_name = None
+_data_base_path = Path(__file__).parent.parent / 'data' / 'experiment_results'
 
 
 def _generate_bonsai_script_name(ephys: bool, miniscope: bool, analog_inputs: bool, 
@@ -75,9 +77,6 @@ layout = [
     [sg.Text('Experiment selection:', font=('Helvetica', 12, 'bold'))],
     [sg.Text('Line #:'), sg.InputText(key='line_number', size=(6, 1)), sg.Button('Confirm Line')],
     [sg.Text('Confirmed Line: None', key='confirmed_status', text_color='orange')],
-
-    [sg.Text('Hardware Connection:', font=('Helvetica', 12, 'bold'))],
-    [sg.Button('Connect Hardware'), sg.Text('Status: Disconnected', key='hw_status')],
 ]
 
 window = sg.Window('Data Acquisition', layout)
@@ -110,8 +109,15 @@ while True:
                           'Please ensure the corresponding .bat file exists in scripts/')
         else:
             try:
-                subprocess.run([str(script_path)], check=True)
+                # Prepare arguments for the batch file
+                base_path = str(_data_base_path.relative_to(BASE_DIR / 'scripts'))
+                rat_name = _confirmed_rat_name if _confirmed_rat_name else 'test'
+                
+                # Launch Bonsai with base_path and rat_name arguments
+                subprocess.run([str(script_path), base_path, rat_name], check=True)
                 sg.popup('Bonsai launched successfully')
+                # Close the GUI window after successful Bonsai launch
+                break
             except Exception as e:
                 sg.popup_error(f'Error launching Bonsai: {e}')
     
@@ -133,22 +139,22 @@ while True:
                 continue
 
             row = df_exp.iloc[line_idx]
+            
+            # Extract rat name from 'id' column (column 2)
+            rat_name = row.get('id', 'unknown')
+            
+            # Display experiment info
             summary = _process_experiment_row(row)
-            # Update display with processing summary
             window['data_display'].update(summary.to_string())
             
-            # TRACK: Mark this experiment line as confirmed
+            # TRACK: Mark this experiment line as confirmed with rat name
             _confirmed_experiment_line = line_idx + 1  # Store 1-based line number
+            _confirmed_rat_name = str(rat_name)
+            
             window['confirmed_status'].update(f'Confirmed Line: {_confirmed_experiment_line}', text_color='green')
             
-            # Here you would kick off the real background processing pipeline
-            sg.popup('Experiment line confirmed and processing started')
+            sg.popup('Experiment line confirmed')
         except Exception as e:
             sg.popup_error(f'Error processing experiment line: {e}')
     
-    elif event == 'Connect Hardware':
-        # Placeholder for hardware connection
-        window['hw_status'].update('Status: Connected')
-        sg.popup('Hardware connected successfully')
-
 window.close()
