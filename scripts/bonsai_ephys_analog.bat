@@ -9,8 +9,8 @@ set "RAT_NAME=%2"
 if "%PATH_ARG%"=="" set "PATH_ARG=..\data\experiment_results"
 if "%RAT_NAME%"=="" set "RAT_NAME=test"
 
-set "SCRIPT=%~dp0..\bonsai\bonsai_base.bonsai"
-set "LAYOUT=%~dp0..\bonsai\bonsai_base.layout"
+set "SCRIPT=%~dp0..\bonsai\bonsai_ephys_analog.bonsai"
+set "LAYOUT=%~dp0..\bonsai\bonsai_ephys_analog.layout"
 
 REM Run Bonsai with parameters
 bonsai --no-editor --visualizer-layout "%LAYOUT%" -p path="%PATH_ARG%" -p rat_name="%RAT_NAME%" "%SCRIPT%"

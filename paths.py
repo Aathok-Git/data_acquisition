@@ -1,7 +1,7 @@
 from pathlib import Path
 
 # Base directory for the project
-BASE_DIR = Path(__file__).parent.parent
+BASE_DIR = Path(__file__).parent
 
 # Data acquisition directories
 DATA_DIR = BASE_DIR / "data"
