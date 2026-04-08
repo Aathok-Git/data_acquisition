@@ -19,6 +19,7 @@ BASE_DIR = Path(__file__).parent
 _confirmed_experiment_line = None
 _confirmed_rat_name = None
 _confirmed_infusion_rate = None
+_confirmed_total_systemic_time = None  # Total infusion time in seconds
 _data_base_path = BASE_DIR / 'data' / 'experiment_results'
 
 
@@ -66,7 +67,11 @@ def _process_experiment_row(row: pd.Series):
 
 def _parse_float(value):
     try:
-        return float(value)
+        result = float(value)
+        # Check if result is NaN (from pandas NA values)
+        if pd.isna(result):
+            return None
+        return result
     except (TypeError, ValueError):
         return None
 
@@ -96,7 +101,7 @@ def _connect_to_syringe():
         return None
 
 
-def _prepare_syringe_commands(infusion_rate: float):
+def _prepare_syringe_commands(infusion_rate: float, total_time_seconds: float = None):
     """Build syringe pump commands for the PHD Ultra."""
     if infusion_rate is None:
         return []
@@ -105,10 +110,16 @@ def _prepare_syringe_commands(infusion_rate: float):
     # irate <rate> - set infusion rate in mL/min
     # citime <time> - set continuous infusion time in minutes (0 = continuous)
     # ttime <time> - set total time in minutes (0 = continuous)
+    
+    # Convert total time from seconds to minutes
+    total_time_minutes = 0
+    if total_time_seconds is not None and total_time_seconds > 0:
+        total_time_minutes = total_time_seconds / 60
+    
     return [
         f'irate {infusion_rate:.3f}',
         'citime 0',  # Continuous infusion
-        'ttime 0',   # Continuous total time
+        f'ttime {total_time_minutes:.1f}',   # Total time in minutes
     ]
 
 
@@ -205,7 +216,7 @@ while True:
                     if ser:
                         window['pump_status'].update('Preparing syringe pump parameters...')
                         window.refresh()
-                        commands = _prepare_syringe_commands(_confirmed_infusion_rate)
+                        commands = _prepare_syringe_commands(_confirmed_infusion_rate, _confirmed_total_systemic_time)
                         success = _update_syringe_parameters(ser, commands, window)
                         if success:
                             window['pump_status'].update('Syringe parameters ready')
@@ -247,19 +258,40 @@ while True:
             # Extract rat name from 'id' column (column 2)
             rat_name = row.get('id', 'unknown')
             infusion_rate = _calculate_infusion_rate(row)
-            infusion_text = f'{infusion_rate:.3f}' if infusion_rate is not None else 'N/A'
+            # Check for NaN values as well as None
+            has_valid_rate = infusion_rate is not None and not pd.isna(infusion_rate)
+            infusion_text = f'{infusion_rate:.3f}' if has_valid_rate else 'No drug'
+            
+            # Extract total systemic time from 'total systemic time (min)' column and convert to seconds
+            # Only extract if a drug is being used (has_valid_rate is True)
+            total_systemic_time_sec = None
+            if has_valid_rate:
+                total_systemic_time_min = _parse_float(row.get('total systemic time (min)'))
+                if total_systemic_time_min is not None and total_systemic_time_min > 0:
+                    total_systemic_time_sec = total_systemic_time_min * 60
             
             # Display experiment info
             summary = _process_experiment_row(row)
             window['data_display'].update(summary.to_string())
-            window['infusion_status'].update(f'Infusion Rate (mL/min): {infusion_text}', text_color='green' if infusion_rate is not None else 'orange')
+            window['infusion_status'].update(f'Infusion Rate (mL/min): {infusion_text}', text_color='green' if has_valid_rate else 'orange')
             
             # TRACK: Mark this experiment line as confirmed with rat name
             _confirmed_experiment_line = line_idx + 1  # Store 1-based line number
             _confirmed_rat_name = str(rat_name)
             _confirmed_infusion_rate = infusion_rate
+            _confirmed_total_systemic_time = total_systemic_time_sec
             
             window['confirmed_status'].update(f'Confirmed Line: {_confirmed_experiment_line}', text_color='green')
+            
+            # Handle syringe checkbox state based on infusion data availability
+            if not has_valid_rate:
+                # No drug data: disable syringe checkbox and update status
+                window['syringe_use'].update(disabled=True)
+                window['pump_status'].update('Insufficient infusion data: syringe unavailable', text_color='red')
+            else:
+                # Drug data available: enable syringe checkbox
+                window['syringe_use'].update(disabled=False)
+                window['pump_status'].update('Syringe available - ready for configuration', text_color='green')
             
             sg.popup('Experiment line confirmed')
         except Exception as e:

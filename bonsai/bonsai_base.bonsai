@@ -170,7 +170,7 @@
               <Name>Source1</Name>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>..\data\experiment_results\test\2026-4-3\16-5-5\Initialized-time.csv</io:FileName>
+              <io:FileName>..\data\experiment_results\test\2026-4-7\14-55-55\Initialized-time.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
@@ -495,7 +495,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="ffmpeg:VideoWriter">
-                <ffmpeg:FileName>..\data\experiment_results\test\2026-4-3\16-5-5\behavioral_camera\behavioral_camera_feed_.avi</ffmpeg:FileName>
+                <ffmpeg:FileName>..\data\experiment_results\test\2026-4-7\14-55-55\behavioral_camera\behavioral_camera_feed_.avi</ffmpeg:FileName>
                 <ffmpeg:Suffix>FileCount</ffmpeg:Suffix>
                 <ffmpeg:Overwrite>false</ffmpeg:Overwrite>
                 <ffmpeg:FrameRate>60</ffmpeg:FrameRate>
@@ -770,7 +770,7 @@ true</scr:Expression>
                     </PropertyMappings>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>..\data\experiment_results\2026-04-0314-02-20\log.csv</io:FileName>
+                    <io:FileName>..\data\experiment_results\test\2026-4-7\14-32-32\log.csv</io:FileName>
                     <io:Append>true</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
@@ -1500,7 +1500,7 @@ true</scr:Expression>
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>..\data\experiment_results\test\2026-4-3\16-5-5\BeginData-time.csv</io:FileName>
+              <io:FileName>..\data\experiment_results\test\2026-4-7\14-47-47\BeginData-time.csv</io:FileName>
               <io:Append>true</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
