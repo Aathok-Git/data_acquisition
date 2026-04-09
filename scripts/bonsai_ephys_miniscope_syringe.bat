@@ -9,7 +9,7 @@ set "RAT_NAME=%2"
 if "%PATH_ARG%"=="" set "PATH_ARG=..\data\experiment_results"
 if "%RAT_NAME%"=="" set "RAT_NAME=test"
 
-set "SCRIPT=%~dp0..\bonsai\bonsai_ephys_miniscope_syringe.bonsai"
+set "SCRIPT=%~dp0..\bonsai\bonsai_ephys_miniscope.bonsai"
 set "LAYOUT=%~dp0..\bonsai\bonsai_ephys_miniscope_syringe.layout"
 
 REM Run Bonsai with parameters
