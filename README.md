@@ -1,186 +1,193 @@
 # data_acquisition
 
-A data acquisition pipeline for the Melonakos Lab at BYU. This system integrates with the ONIX hardware platform and Bonsai workflow engine to control and manage experiments using electrophysiology (ephys), miniscope imaging, and additional analog/behavioral data streams.
+A data acquisition launcher for the Melonakos Lab at BYU. This repository provides a GUI-based selector to configure and launch Bonsai workflows for ONIX experiments, with support for ephys, miniscope, analog inputs, and syringe pump control.
 
-## Project Goals
+## Overview
 
-- Provide a unified interface for configuring and launching complex multi-module recording experiments
-- Manage experiment metadata and hardware configurations through a CSV-based system
-- Enable real-time message logging and data tracking during Bonsai workflows
-- Support modular hardware configurations (ephys, miniscope, analog inputs, syringe control)
-- Behavioral camera and event logging are included in all configurations by default
+- `selector.py` is the main GUI application for selecting experiment modules and launching Bonsai scripts.
+- `paths.py` centralizes path configuration, including the experiment metadata CSV and the output results directory.
+- `data/experiments.csv` stores the experiment metadata used by the selector.
+- `scripts/` contains batch launchers for each supported module combination.
+- `setup_experiment.bat` is a Windows helper script that activates the conda environment and starts the selector GUI.
 
 ## Repository Structure
 
 ```
 data_acquisition/
-├── selector.py              # Main GUI for experiment selection and Bonsai launcher
-├── setup_experiment.bat     # Quick launcher for selector.py (Windows)
-├── bonsai_logging.py        # Logging GUI module for use with Bonsai workflows
-├── paths.py                 # Path configuration and constants
+├── selector.py
+├── setup_experiment.bat
+├── paths.py
+├── environment.yml
 ├── data/
-│   └── experiments.csv      # Experiment metadata and configurations
+│   └── experiments.csv
 ├── scripts/
-│   ├── bonsai_base.bat                          # Base recording (camera + events)
-│   ├── bonsai_ephys.bat                         # Ephys only
-│   ├── bonsai_miniscope.bat                     # Miniscope only
-│   ├── bonsai_analog.bat                        # Analog inputs only
-│   ├── bonsai_syringe.bat                       # Syringe control only
-│   ├── bonsai_ephys_miniscope.bat               # Ephys + Miniscope
-│   ├── bonsai_ephys_analog.bat                  # Ephys + Analog
-│   ├── bonsai_ephys_syringe.bat                 # Ephys + Syringe
-│   ├── bonsai_miniscope_analog.bat              # Miniscope + Analog
-│   ├── bonsai_miniscope_syringe.bat             # Miniscope + Syringe
-│   ├── bonsai_ephys_miniscope_analog.bat        # Ephys + Miniscope + Analog
-│   ├── bonsai_ephys_miniscope_syringe.bat       # Ephys + Miniscope + Syringe
-│   ├── README.md                                # Scripts directory documentation
-│   └── workflow_*.bonsai                        # Actual Bonsai workflows (create as needed)
-├── README.md                # This file
+│   ├── bonsai_analog.bat
+│   ├── bonsai_analog_syringe.bat
+│   ├── bonsai_base.bat
+│   ├── bonsai_ephys.bat
+│   ├── bonsai_ephys_analog.bat
+│   ├── bonsai_ephys_analog_syringe.bat
+│   ├── bonsai_ephys_miniscope.bat
+│   ├── bonsai_ephys_miniscope_analog.bat
+│   ├── bonsai_ephys_miniscope_analog_syringe.bat
+│   ├── bonsai_ephys_miniscope_syringe.bat
+│   ├── bonsai_ephys_syringe.bat
+│   ├── bonsai_miniscope.bat
+│   ├── bonsai_miniscope_analog.bat
+│   ├── bonsai_miniscope_analog_syringe.bat
+│   ├── bonsai_miniscope_syringe.bat
+│   └── bonsai_syringe.bat
+├── bonsai/
+│   ├── bonsai_base.bonsai
+│   ├── bonsai_base.layout
+│   ├── DraftMasterWorkflow.bonsai
+│   └── ...
+├── README.md
 └── LICENSE
 ```
 
-## Getting Started
+## Prerequisites
 
-### Prerequisites
+- Conda (Miniconda or Anaconda)
+- Python 3.10
+- Bonsai installed and available on the system PATH
+- Windows is the primary supported platform for the provided `.bat` launchers
 
-- Python 3.8+
-- Conda or pip for package management
-- Bonsai workflow engine
-- ONIX hardware drivers
+## Installation
 
-### Installation
+1. Clone the repository:
 
-1. Clone this repository:
    ```bash
    git clone <repository-url>
    cd data_acquisition
    ```
 
-2. Create and activate the conda environment:
+2. Create the conda environment from `environment.yml`:
+
    ```bash
    conda env create -f environment.yml
+   ```
+
+3. Activate the environment:
+
+   ```bash
    conda activate data_acquisition
    ```
 
-3. Verify dependencies are installed:
+4. Confirm required Python packages are installed:
+
    ```bash
-   pip list | grep -i "freesimplegui\|pandas"
+   conda list | findstr /R "freesimplegui pandas"
    ```
+
+5. Verify Bonsai is accessible from the command line:
+
+   ```bash
+   bonsai --version
+   ```
+
+> If `conda` is not available, install Python 3.10 and then run:
+>
+> ```bash
+> pip install freesimplegui==5.2.0.post1 pandas
+> ```
+
+## Configuration
+
+### `paths.py`
+
+This file defines project paths used by the selector:
+
+- `EXPERIMENTS` points to `data/experiments.csv`
+- `OUTPUT_DIR` points to `data/experiment_results`
+
+Modify these values only if you move the repository or want to use a different output directory.
+
+### `data/experiments.csv`
+
+This CSV file holds experiment metadata and is required for the selector to confirm a run. Each row should represent one experiment configuration.
 
 ## Usage
 
-### Quick Start
+### Windows Quick Start
 
-The easiest way to launch the experiment selector is to double-click the batch file:
+Run the helper batch script:
 
 ```bash
 setup_experiment.bat
 ```
 
-This will automatically activate the conda environment and launch the GUI.
+This script changes to the project directory, activates the `data_acquisition` conda environment, and launches `selector.py`.
 
-Alternatively, from the command line in the data_acquisition directory:
+### Manual Start
+
+From the activated conda environment, start the selector directly:
 
 ```bash
 python selector.py
 ```
 
-### 1. Launching the Experiment Selector
+### Using the Selector GUI
 
-The main interface for data acquisition is the experiment selector GUI.
+1. Choose core recording modules (selecting none is an option):
+   - `Ephys`
+   - `Miniscope`
 
-**Available Modules:**
-- **Core Recording Types:** Ephys, Miniscope (select any combination)
-- **Optional Modules:** Analog Inputs, Syringe Use (select any combination)
-- **Always Included:** Behavioral camera and event logging in all configurations
+2. Choose optional modules:
+   - `Analog Inputs`
+   - `Syringe Use`
 
-**Workflow:**
-1. Select the desired recording modules (ephys, miniscope, or both)
-2. Check any optional modules you need (analog inputs, syringe control)
-3. Enter the experiment line number from `data/experiments.csv` and click "Confirm Line"
-4. Click "Connect Hardware" to initialize hardware interfaces
-5. Click "Launch Bonsai" to start the recording workflow
+3. Enter an experiment line number from `data/experiments.csv` and click `Confirm Line`.
+4. The GUI will display experiment details and confirm whether syringe control is available.
+5. Click the folder icon to open the configured output directory.
+6. Click `Launch Bonsai` to start the selected Bonsai workflow.
 
-**Safety Features:**
-- Failsafe prevents launching Bonsai without confirming an experiment line
-- Error messages indicate missing .bat files or invalid configurations
-- Visual indicator shows confirmed experiment status
+### Output Folder
 
-### 2. Using Bonsai Logger in Workflows
+The folder icon in the GUI opens the directory defined by `OUTPUT_DIR` in `paths.py`, usually:
 
-The `bonsai_logging.py` module provides message logging capabilities within Bonsai workflows:
-
-```python
-from bonsai_logging import BonsaiLogger
-
-# Create logger instance
-logger = BonsaiLogger()
-logger.start()
-
-# Access message in your workflow
-current_message = logger.state.message
-if logger.state.submitted:
-    print(f"User logged: {current_message}")
-    logger.reset_submitted_flag()
-
-# Stop when done
-logger.stop()
+```text
+data/experiment_results
 ```
 
-**Features:**
-- GUI textbox for entering messages
-- Submit/Clear buttons
-- Thread-safe operation (non-blocking)
-- State tracking for submitted messages
+This directory is created automatically if it does not already exist.
 
-### 3. Experiment Configuration
+## Scripts and Workflow Launching
 
-Experiments are defined in `data/experiments.csv`. Edit this file to add or modify experiment configurations that will be loaded by the selector.
+`selector.py` chooses the correct batch file in `scripts/` based on the selected modules. The naming pattern is:
 
-## Currently Unimplemented / Placeholder Features
+- `bonsai_base.bat`
+- `bonsai_ephys.bat`
+- `bonsai_miniscope.bat`
+- `bonsai_analog.bat`
+- `bonsai_syringe.bat`
+- and combinations like `bonsai_ephys_miniscope_analog.bat`
 
-The following features are planned but not yet fully implemented:
+Each script launches Bonsai with the selected workflow and passes the output directory and rat name as arguments.
 
-1. **Heavy Data Processing Pipeline** (`selector.py:_process_experiment_row`)
-   - Currently only provides basic data summaries
-   - Placeholder for real data preprocessing and validation
+## Notes
 
-2. **Background Data Processing** (`selector.py` after "Confirm Line")
-   - Experiment configuration is validated but actual data processing pipeline is not triggered
-   - Needs implementation of data ingestion, preprocessing, and storage
-
-3. **Hardware Connection Interface** (`selector.py:"Connect Hardware"`)
-   - Currently a placeholder that updates UI status
-   - Needs ONIX driver integration and actual connection logic
-
-4. **Real-time Data Monitoring**
-   - GUI for displaying live recording status, data rates, and hardware health
-
-5. **Data Export & Analysis Tools**
-   - Tools for post-acquisition data export and preliminary analysis
-
-6. **Error Handling & Logging**
-   - Comprehensive logging to file for troubleshooting and auditing
-
-## Development Notes
-
-- The project uses **FreeSimpleGUI** (modern fork of PySimpleGUI) for GUI components
-- Bonsai scripts are batch files that launch the Bonsai workflow engine
-- **paths.py** centralizes path management for easy relocation of the project
-- Experiment metadata is managed via CSV for easy version control and sharing
+- The GUI prevents Bonsai launch until an experiment line is confirmed.
+- The selector supports syringe pump setup and will attempt to configure it when `Syringe Use` is selected.
+- The project currently uses `FreeSimpleGUI` for the interface and assumes Bonsai is present on the host machine.
 
 ## Contributing
 
-When adding features, please:
-1. Update this README with new functionality
-2. Use FreeSimpleGUI for any new UI components
-3. Maintain centralized path management in `paths.py`
-4. Add docstrings to new functions and classes
+If you add new features or hardware support:
+
+1. Update `README.md` with the new behavior.
+2. Update `paths.py` if you add new path configuration.
+3. Add or update a script in `scripts/` for the new workflow.
+4. Keep GUI logic in `selector.py` clean and documented.
 
 ---
-
 ## Author
 
 **Project Lead:** Luke M. (Melonakos Lab, BYU)
+
+
+## License
+
+This project is licensed under the terms in `LICENSE`.
 
 

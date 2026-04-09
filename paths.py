@@ -6,3 +6,4 @@ BASE_DIR = Path(__file__).parent
 # Data acquisition directories
 DATA_DIR = BASE_DIR / "data"
 EXPERIMENTS = DATA_DIR / "experiments.csv"
+OUTPUT_DIR = DATA_DIR / "experiment_results"

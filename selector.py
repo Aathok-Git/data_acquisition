@@ -1,8 +1,9 @@
 import FreeSimpleGUI as sg
 import pandas as pd
 import subprocess
+import sys
 from pathlib import Path
-from paths import EXPERIMENTS
+from paths import EXPERIMENTS, OUTPUT_DIR
 import serial
 import time
 
@@ -14,7 +15,6 @@ TESTING_MODE_SKIP_EXPERIMENT_CHECK = False
 COM_PORT = 'COM4'
 BAUD_RATE = 115200
 SERIAL_TIMEOUT = 2
-BASE_DATA_PATH = Path(__file__).parent / 'data' / 'experiment_results'
 SCRIPTS_DIR = Path(__file__).parent / 'scripts'
 
 
@@ -181,7 +181,7 @@ def create_layout():
         [sg.Text('Select Optional Modules:', font=('Helvetica', 12, 'bold'))],
         [sg.Checkbox('Analog Inputs', key='analog_inputs'), sg.Checkbox('Syringe Use', key='syringe_use')],
 
-        [sg.Button('Launch Bonsai'), sg.Button('Exit')],
+        [sg.Button('Launch Bonsai'), sg.Button('Exit'), sg.Button('📁', key='open_output_folder', tooltip='Open experiment output folder')],
 
         [sg.Multiline(size=(50, 8), key='data_display', disabled=True)],
 
@@ -191,6 +191,21 @@ def create_layout():
         [sg.Text('Infusion Rate (mL/min): None', key='infusion_status', text_color='orange')],
         [sg.Text('Pump Status: Idle', key='pump_status', text_color='orange')],
     ]
+
+
+def open_output_folder(window):
+    """Open the output directory in the system file explorer."""
+    try:
+        target_path = Path(OUTPUT_DIR)
+        target_path.mkdir(parents=True, exist_ok=True)
+        if sys.platform.startswith('darwin'):
+            subprocess.run(['open', str(target_path)], check=True)
+        elif sys.platform.startswith('win'):
+            subprocess.run(['explorer', str(target_path)], check=True)
+        else:
+            subprocess.run(['xdg-open', str(target_path)], check=True)
+    except Exception as e:
+        sg.popup_error(f'Unable to open output folder: {e}')
 
 
 def handle_confirm_line(values, window, state: ExperimentState):
@@ -302,7 +317,7 @@ def handle_launch_bonsai(values, window, state: ExperimentState):
 
     # Launch Bonsai
     try:
-        base_path = '..\\data\\experiment_results'
+        base_path = str(OUTPUT_DIR)
         rat_name = state.rat_name or 'test'
         subprocess.run([str(script_path), base_path, rat_name], check=True)
         sg.popup('Bonsai launched successfully')
@@ -327,6 +342,8 @@ def main():
             handle_confirm_line(values, window, state)
         elif event == 'Launch Bonsai':
             handle_launch_bonsai(values, window, state)
+        elif event == 'open_output_folder':
+            open_output_folder(window)
 
     window.close()
 
