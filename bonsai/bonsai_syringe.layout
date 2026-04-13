@@ -162,4 +162,22 @@
       </WindowSettings>
     </NestedLayout>
   </WindowSettings>
+  <WindowSettings Index="55">
+    <NestedLayout>
+      <WindowSettings Index="2">
+        <Location>
+          <X>1405</X>
+          <Y>778</Y>
+        </Location>
+        <Size>
+          <Width>316</Width>
+          <Height>189</Height>
+        </Size>
+        <VisualizerTypeName>Bonsai.Gui.ButtonVisualizer</VisualizerTypeName>
+        <VisualizerSettings>
+          <ButtonVisualizer />
+        </VisualizerSettings>
+      </WindowSettings>
+    </NestedLayout>
+  </WindowSettings>
 </VisualizerLayout>

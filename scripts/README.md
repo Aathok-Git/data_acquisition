@@ -2,6 +2,17 @@
 
 This directory contains batch files (.bat) that launch different Bonsai workflow configurations based on module selections in the main selector.py GUI.
 
+## How to Use
+
+Run the **setup_experiment.bat** script in the parent directory to launch the experiment selector GUI. This script:
+
+1. Initializes Conda (runs `conda init` if needed)
+2. Activates the `data_acquisition` conda environment
+3. Launches the selector GUI (selector.py) for choosing module configurations
+4. Runs the appropriate .bat file from this directory based on your selections
+
+If you see an error about needing to run `conda init`, the setup script will handle it automatically—just restart your terminal and run the script again.
+
 ## Naming Convention
 
 Batch files follow a naming pattern based on which modules are selected:
