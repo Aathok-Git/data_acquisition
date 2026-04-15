@@ -8,7 +8,7 @@ import serial
 import time
 
 # ========== CONFIGURATION ==========
-TESTING_MODE_SKIP_EXPERIMENT_CHECK = False
+TESTING_MODE_SKIP_EXPERIMENT_CHECK = True
 # ====================================
 
 # Constants
@@ -136,7 +136,7 @@ class SyringeController:
             return []
 
         return [
-            f'irate {infusion_rate:.3f}',
+            f'irate {infusion_rate:.3f} ml/min',
             'citime 0',  # Continuous infusion
             f'ttime {total_time_seconds}',  # Total time in seconds
         ]
@@ -239,7 +239,7 @@ def handle_confirm_line(values, window, state: ExperimentState):
         if has_valid_rate:
             total_time_min = parse_float(row.get('total systemic time (min)'))
             if total_time_min and total_time_min > 0:
-                total_systemic_time_sec = total_time_min * 60
+                total_systemic_time_sec = int(total_time_min * 60)
 
         # Update GUI
         summary = process_experiment_row(row)
@@ -253,7 +253,7 @@ def handle_confirm_line(values, window, state: ExperimentState):
 
         # Handle syringe checkbox
         if not has_valid_rate:
-            window['syringe_use'].update(disabled=True)
+            window['syringe_use'].update(disabled=True, value=False)
             window['pump_status'].update('Insufficient infusion data: syringe unavailable', text_color='red')
         else:
             window['syringe_use'].update(disabled=False)

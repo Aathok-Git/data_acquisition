@@ -45,28 +45,10 @@
       <ObjectTextVisualizer />
     </VisualizerSettings>
   </WindowSettings>
-  <WindowSettings Index="24">
-    <NestedLayout>
-      <WindowSettings Index="3">
-        <Location>
-          <X>1407</X>
-          <Y>123</Y>
-        </Location>
-        <Size>
-          <Width>255</Width>
-          <Height>168</Height>
-        </Size>
-        <VisualizerTypeName>Bonsai.Gui.ButtonVisualizer</VisualizerTypeName>
-        <VisualizerSettings>
-          <ButtonVisualizer />
-        </VisualizerSettings>
-      </WindowSettings>
-    </NestedLayout>
-  </WindowSettings>
   <WindowSettings Index="25">
     <Location>
-      <X>1405</X>
-      <Y>288</Y>
+      <X>1418</X>
+      <Y>211</Y>
     </Location>
     <Size>
       <Width>366</Width>
@@ -77,53 +59,34 @@
       <PropertyGridVisualizer />
     </VisualizerSettings>
   </WindowSettings>
-  <WindowSettings Index="40">
-    <Visible>false</Visible>
-    <Location>
-      <X>156</X>
-      <Y>156</Y>
-    </Location>
-    <Size>
-      <Width>336</Width>
-      <Height>279</Height>
-    </Size>
-    <VisualizerTypeName>Bonsai.Vision.Design.IplImageVisualizer</VisualizerTypeName>
-    <VisualizerSettings>
-      <IplImageVisualizer />
-    </VisualizerSettings>
+  <WindowSettings Index="26">
+    <NestedLayout>
+      <WindowSettings Index="3">
+        <Location>
+          <X>1564</X>
+          <Y>48</Y>
+        </Location>
+        <Size>
+          <Width>207</Width>
+          <Height>162</Height>
+        </Size>
+        <VisualizerTypeName>Bonsai.Gui.ButtonVisualizer</VisualizerTypeName>
+        <VisualizerSettings>
+          <ButtonVisualizer />
+        </VisualizerSettings>
+      </WindowSettings>
+    </NestedLayout>
   </WindowSettings>
-  <WindowSettings Index="42">
-    <Location>
-      <X>689</X>
-      <Y>283</Y>
-    </Location>
-    <Size>
-      <Width>461</Width>
-      <Height>384</Height>
-    </Size>
-    <VisualizerTypeName>Bonsai.Gui.GroupBoxVisualizer</VisualizerTypeName>
-    <VisualizerSettings>
-      <GroupBoxVisualizer>
-        <MashupSettings>
-          <Source>30</Source>
-          <VisualizerTypeName>Bonsai.Vision.Design.IplImageVisualizer</VisualizerTypeName>
-          <VisualizerSettings>
-            <IplImageVisualizer />
-          </VisualizerSettings>
-        </MashupSettings>
-      </GroupBoxVisualizer>
-    </VisualizerSettings>
-  </WindowSettings>
-  <WindowSettings Index="50">
+  <WindowSettings Index="27">
     <NestedLayout>
       <WindowSettings Index="45">
         <Location>
-          <X>688</X>
-          <Y>667</Y>
+          <X>1382</X>
+          <Y>711</Y>
         </Location>
         <Size>
-          <Width>461</Width>
-          <Height>134</Height>
+          <Width>449</Width>
+          <Height>124</Height>
         </Size>
         <VisualizerTypeName>Bonsai.Gui.GroupBoxVisualizer</VisualizerTypeName>
         <VisualizerSettings>
@@ -162,16 +125,42 @@
       </WindowSettings>
     </NestedLayout>
   </WindowSettings>
-  <WindowSettings Index="55">
+  <WindowSettings Index="28">
+    <NestedLayout>
+      <WindowSettings Index="16">
+        <Location>
+          <X>608</X>
+          <Y>188</Y>
+        </Location>
+        <Size>
+          <Width>593</Width>
+          <Height>537</Height>
+        </Size>
+        <VisualizerTypeName>Bonsai.Gui.GroupBoxVisualizer</VisualizerTypeName>
+        <VisualizerSettings>
+          <GroupBoxVisualizer>
+            <MashupSettings>
+              <Source>4</Source>
+              <VisualizerTypeName>Bonsai.Vision.Design.IplImageVisualizer</VisualizerTypeName>
+              <VisualizerSettings>
+                <IplImageVisualizer />
+              </VisualizerSettings>
+            </MashupSettings>
+          </GroupBoxVisualizer>
+        </VisualizerSettings>
+      </WindowSettings>
+    </NestedLayout>
+  </WindowSettings>
+  <WindowSettings Index="33">
     <NestedLayout>
       <WindowSettings Index="2">
         <Location>
-          <X>1405</X>
-          <Y>778</Y>
+          <X>1345</X>
+          <Y>60</Y>
         </Location>
         <Size>
-          <Width>316</Width>
-          <Height>189</Height>
+          <Width>221</Width>
+          <Height>138</Height>
         </Size>
         <VisualizerTypeName>Bonsai.Gui.ButtonVisualizer</VisualizerTypeName>
         <VisualizerSettings>

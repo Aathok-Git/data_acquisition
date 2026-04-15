@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WorkflowBuilder Version="2.9.0"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
+                 xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
+                 xmlns:gui="clr-namespace:Bonsai.Gui;assembly=Bonsai.Gui"
+                 xmlns="https://bonsai-rx.org/2018/workflow">
+  <Workflow>
+    <Nodes>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="StringProperty">
+          <Value>Channels: 0 = O2, 1 = CO2, 2 = AA, 3 = N2O</Value>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="VisualizerMapping" />
+      <Expression xsi:type="WorkflowInput">
+        <Name>Source1</Name>
+      </Expression>
+      <Expression xsi:type="MemberSelector">
+        <Selector>AnalogData</Selector>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="dsp:SelectChannels">
+          <dsp:Channels>
+            <dsp:int>0</dsp:int>
+          </dsp:Channels>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="dsp:Rescale">
+          <dsp:Min>0</dsp:Min>
+          <dsp:Max>5</dsp:Max>
+          <dsp:RangeMin>0</dsp:RangeMin>
+          <dsp:RangeMax>100</dsp:RangeMax>
+          <dsp:RescaleType>Linear</dsp:RescaleType>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="dsp:SelectChannels">
+          <dsp:Channels>
+            <dsp:int>4</dsp:int>
+          </dsp:Channels>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="dsp:Rescale">
+          <dsp:Min>0</dsp:Min>
+          <dsp:Max>5</dsp:Max>
+          <dsp:RangeMin>0</dsp:RangeMin>
+          <dsp:RangeMax>10</dsp:RangeMax>
+          <dsp:RescaleType>Linear</dsp:RescaleType>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="dsp:SelectChannels">
+          <dsp:Channels>
+            <dsp:int>6</dsp:int>
+          </dsp:Channels>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="dsp:Rescale">
+          <dsp:Min>0</dsp:Min>
+          <dsp:Max>5</dsp:Max>
+          <dsp:RangeMin>0</dsp:RangeMin>
+          <dsp:RangeMax>10</dsp:RangeMax>
+          <dsp:RescaleType>Linear</dsp:RescaleType>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="dsp:SelectChannels">
+          <dsp:Channels>
+            <dsp:int>8</dsp:int>
+          </dsp:Channels>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="dsp:Rescale">
+          <dsp:Min>0</dsp:Min>
+          <dsp:Max>5</dsp:Max>
+          <dsp:RangeMin>0</dsp:RangeMin>
+          <dsp:RangeMax>100</dsp:RangeMax>
+          <dsp:RescaleType>Linear</dsp:RescaleType>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Zip" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="dsp:Concat">
+          <dsp:Axis>0</dsp:Axis>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="VisualizerMapping" />
+      <Expression xsi:type="gui:TableLayoutPanelBuilder">
+        <gui:Name>Gas Agent Analyzer</gui:Name>
+        <gui:Enabled>true</gui:Enabled>
+        <gui:Visible>true</gui:Visible>
+        <gui:Font>Microsoft Sans Serif, 8.25pt</gui:Font>
+        <gui:ColumnCount>1</gui:ColumnCount>
+        <gui:RowCount>2</gui:RowCount>
+        <gui:ColumnStyles />
+        <gui:RowStyles>
+          <gui:RowStyle>
+            <gui:SizeType>Absolute</gui:SizeType>
+            <gui:Height>25</gui:Height>
+          </gui:RowStyle>
+          <gui:RowStyle>
+            <gui:Height>0</gui:Height>
+          </gui:RowStyle>
+        </gui:RowStyles>
+        <gui:CellSpans />
+      </Expression>
+      <Expression xsi:type="WorkflowOutput" />
+    </Nodes>
+    <Edges>
+      <Edge From="0" To="1" Label="Source1" />
+      <Edge From="1" To="15" Label="Source1" />
+      <Edge From="2" To="3" Label="Source1" />
+      <Edge From="3" To="4" Label="Source1" />
+      <Edge From="3" To="6" Label="Source1" />
+      <Edge From="3" To="8" Label="Source1" />
+      <Edge From="3" To="10" Label="Source1" />
+      <Edge From="4" To="5" Label="Source1" />
+      <Edge From="5" To="12" Label="Source1" />
+      <Edge From="6" To="7" Label="Source1" />
+      <Edge From="7" To="12" Label="Source2" />
+      <Edge From="8" To="9" Label="Source1" />
+      <Edge From="9" To="12" Label="Source3" />
+      <Edge From="10" To="11" Label="Source1" />
+      <Edge From="11" To="12" Label="Source4" />
+      <Edge From="12" To="13" Label="Source1" />
+      <Edge From="13" To="14" Label="Source1" />
+      <Edge From="14" To="15" Label="Source2" />
+      <Edge From="15" To="16" Label="Source1" />
+    </Edges>
+  </Workflow>
+</WorkflowBuilder>

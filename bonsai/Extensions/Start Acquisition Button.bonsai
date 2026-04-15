@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WorkflowBuilder Version="2.9.0"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
+                 xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                 xmlns:gui="clr-namespace:Bonsai.Gui;assembly=Bonsai.Gui"
+                 xmlns="https://bonsai-rx.org/2018/workflow">
+  <Workflow>
+    <Nodes>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>Initialize Subjects</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="StringProperty">
+                <Value>Start Recording</Value>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="rx:BehaviorSubject">
+              <Name>Button Text</Name>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="StringProperty">
+                <Value />
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="rx:BehaviorSubject">
+              <Name>Start Pressed</Name>
+            </Expression>
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="2" To="3" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject" TypeArguments="sys:String">
+        <Name>Button Text</Name>
+      </Expression>
+      <Expression xsi:type="PropertyMapping">
+        <PropertyMappings>
+          <Property Name="Text" />
+        </PropertyMappings>
+      </Expression>
+      <Expression xsi:type="gui:ButtonBuilder">
+        <gui:Name>Start</gui:Name>
+        <gui:Enabled>true</gui:Enabled>
+        <gui:Visible>true</gui:Visible>
+        <gui:Font>Microsoft Sans Serif, 15.75pt</gui:Font>
+        <gui:Text>Start Recording</gui:Text>
+      </Expression>
+      <Expression xsi:type="MulticastSubject">
+        <Name>Start Pressed</Name>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="StringProperty">
+          <Value>Start Recording</Value>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>Start</Name>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="StringProperty">
+          <Value>Stop Recording</Value>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>Abort</Name>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="StringProperty">
+          <Value>Close Program</Value>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>Close</Name>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="StringProperty">
+          <Value>Start Recording</Value>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Merge" />
+      </Expression>
+      <Expression xsi:type="MulticastSubject">
+        <Name>Button Text</Name>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>Button Text</Name>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject" TypeArguments="sys:String">
+        <Name>Start Pressed</Name>
+      </Expression>
+      <Expression xsi:type="rx:Condition">
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="WorkflowInput">
+              <Name>Source1</Name>
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>Length</Selector>
+            </Expression>
+            <Expression xsi:type="GreaterThan">
+              <Operand xsi:type="IntProperty">
+                <Value>0</Value>
+              </Operand>
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="2" Label="Source1" />
+            <Edge From="2" To="3" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Sample" />
+      </Expression>
+      <Expression xsi:type="rx:Condition">
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="WorkflowInput">
+              <Name>Source1</Name>
+            </Expression>
+            <Expression xsi:type="Equal">
+              <Operand xsi:type="StringProperty">
+                <Value>Start Recording</Value>
+              </Operand>
+            </Expression>
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="MemberSelector">
+                <Selector>Length</Selector>
+              </Builder>
+            </Expression>
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="GreaterThan">
+                <Operand xsi:type="IntProperty">
+                  <Value>0</Value>
+                </Operand>
+              </Builder>
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="2" Label="Source1" />
+            <Edge From="2" To="3" Label="Source1" />
+            <Edge From="3" To="4" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="rx:PublishSubject">
+        <Name>Start</Name>
+      </Expression>
+      <Expression xsi:type="rx:Condition">
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="WorkflowInput">
+              <Name>Source1</Name>
+            </Expression>
+            <Expression xsi:type="Equal">
+              <Operand xsi:type="StringProperty">
+                <Value>Stop Recording</Value>
+              </Operand>
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="2" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="rx:PublishSubject">
+        <Name>Abort</Name>
+      </Expression>
+      <Expression xsi:type="rx:Condition">
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="WorkflowInput">
+              <Name>Source1</Name>
+            </Expression>
+            <Expression xsi:type="Equal">
+              <Operand xsi:type="StringProperty">
+                <Value>Close Program</Value>
+              </Operand>
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="2" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="rx:PublishSubject">
+        <Name>Close</Name>
+      </Expression>
+    </Nodes>
+    <Edges>
+      <Edge From="1" To="2" Label="Source1" />
+      <Edge From="2" To="3" Label="Source1" />
+      <Edge From="3" To="4" Label="Source1" />
+      <Edge From="5" To="12" Label="Source1" />
+      <Edge From="6" To="7" Label="Source1" />
+      <Edge From="7" To="12" Label="Source2" />
+      <Edge From="8" To="9" Label="Source1" />
+      <Edge From="9" To="12" Label="Source3" />
+      <Edge From="10" To="11" Label="Source1" />
+      <Edge From="11" To="12" Label="Source4" />
+      <Edge From="12" To="13" Label="Source1" />
+      <Edge From="14" To="17" Label="Source1" />
+      <Edge From="15" To="16" Label="Source1" />
+      <Edge From="16" To="17" Label="Source2" />
+      <Edge From="17" To="18" Label="Source1" />
+      <Edge From="17" To="20" Label="Source1" />
+      <Edge From="17" To="22" Label="Source1" />
+      <Edge From="18" To="19" Label="Source1" />
+      <Edge From="20" To="21" Label="Source1" />
+      <Edge From="22" To="23" Label="Source1" />
+    </Edges>
+  </Workflow>
+</WorkflowBuilder>
