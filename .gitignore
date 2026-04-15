@@ -2,3 +2,4 @@ __pycache__/
 .vscode/
 /data/experiment_results/
 /bonsai/.bonsai/Settings
+/bonsai/extensions/.bonsai/

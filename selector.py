@@ -4,11 +4,12 @@ import subprocess
 import sys
 from pathlib import Path
 from paths import EXPERIMENTS, OUTPUT_DIR
+import re
 import serial
 import time
 
 # ========== CONFIGURATION ==========
-TESTING_MODE_SKIP_EXPERIMENT_CHECK = True
+TESTING_MODE_SKIP_EXPERIMENT_CHECK = False
 # ====================================
 
 # Constants
@@ -135,16 +136,64 @@ class SyringeController:
         if infusion_rate is None:
             return []
 
-        return [
+        commands = [
             f'irate {infusion_rate:.3f} ml/min',
             'citime 0',  # Continuous infusion
-            f'ttime {total_time_seconds}',  # Total time in seconds
         ]
+
+        if total_time_seconds is not None:
+            commands.append(f'ttime {int(total_time_seconds)}')
+
+        return commands
+
+    def validate_command(self, command: str) -> tuple[bool, str]:
+        """Validate a single syringe pump command string."""
+        if not isinstance(command, str) or not command.strip():
+            return False, 'Command is empty'
+
+        parts = command.strip().lower().split()
+        if parts[0] == 'irate':
+            if len(parts) != 3 or parts[2] != 'ml/min':
+                return False, 'irate must use syntax: irate <rate> ml/min'
+            try:
+                rate = float(parts[1])
+                if rate <= 0:
+                    return False, 'irate value must be positive'
+            except ValueError:
+                return False, 'irate value must be a number'
+            return True, ''
+
+        if parts[0] == 'citime':
+            if len(parts) != 2 or parts[1] != '0':
+                return False, 'citime must use syntax: citime 0'
+            return True, ''
+
+        if parts[0] == 'ttime':
+            if len(parts) != 2:
+                return False, 'ttime must use syntax: ttime <seconds>'
+            if not parts[1].isdigit():
+                return False, 'ttime seconds must be an integer'
+            return True, ''
+
+        return False, f'Unknown command: {parts[0]}'
+
+    def validate_commands(self, commands: list[str]) -> tuple[bool, str]:
+        """Validate a list of syringe pump commands before sending."""
+        for command in commands:
+            valid, message = self.validate_command(command)
+            if not valid:
+                return False, message
+        return True, ''
 
     def send_commands(self, commands: list[str], window) -> bool:
         """Send commands to the syringe pump and update GUI status."""
         if not self.serial_conn:
             window['pump_status'].update('Error: No serial connection')
+            return False
+
+        valid, error_message = self.validate_commands(commands)
+        if not valid:
+            window['pump_status'].update(f'Invalid syringe command: {error_message}', text_color='red')
             return False
 
         try:
@@ -311,6 +360,7 @@ def handle_launch_bonsai(values, window, state: ExperimentState):
         else:
             window['pump_status'].update('Error configuring syringe')
             syringe.disconnect()
+            sg.popup_error('Failed to send commands to syringe pump. Check pump status and try again.')
             return
 
         syringe.disconnect()
