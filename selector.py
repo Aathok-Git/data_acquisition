@@ -230,8 +230,7 @@ def create_layout():
         [sg.Text('Select Optional Modules:', font=('Helvetica', 12, 'bold'))],
         [sg.Checkbox('Analog Inputs', key='analog_inputs'), sg.Checkbox('Syringe Use', key='syringe_use')],
 
-        [sg.Button('Launch Bonsai'), sg.Button('Exit'), sg.Button('📁', key='open_output_folder', tooltip='Open experiment output folder')],
-
+        
         [sg.Multiline(size=(50, 8), key='data_display', disabled=True)],
 
         [sg.Text('Experiment selection:', font=('Helvetica', 12, 'bold'))],
@@ -239,6 +238,8 @@ def create_layout():
         [sg.Text('Confirmed Line: None', key='confirmed_status', text_color='orange')],
         [sg.Text('Infusion Rate (mL/min): None', key='infusion_status', text_color='orange')],
         [sg.Text('Pump Status: Idle', key='pump_status', text_color='orange')],
+        [sg.Button('Launch Bonsai'), sg.Button('Exit'), sg.Button('📁', key='open_output_folder', tooltip='Open experiment output folder')],
+
     ]
 
 
