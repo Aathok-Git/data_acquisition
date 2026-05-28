@@ -234,6 +234,7 @@ def create_layout():
         [sg.Multiline(size=(50, 8), key='data_display', disabled=True)],
 
         [sg.Text('Experiment selection:', font=('Helvetica', 12, 'bold'))],
+        [sg.Text('Experiments CSV:'), sg.Text(str(EXPERIMENTS), key='experiments_path', size=(50, 1)), sg.Button('Change CSV', key='change_csv', tooltip='Select experiments CSV file')],
         [sg.Text('Line #:'), sg.InputText(key='line_number', size=(6, 1)), sg.Button('Confirm Line')],
         [sg.Text('Confirmed Line: None', key='confirmed_status', text_color='orange')],
         [sg.Text('Infusion Rate (mL/min): None', key='infusion_status', text_color='orange')],
@@ -258,7 +259,24 @@ def open_output_folder(window):
         sg.popup_error(f'Unable to open output folder: {e}')
 
 
-def handle_confirm_line(values, window, state: ExperimentState):
+def change_experiments_file(window, current_path: Path) -> Path:
+    """Open a file picker to select a new experiments CSV. Returns the new Path or the original if canceled."""
+    try:
+        initial_folder = str(current_path.parent) if current_path is not None else str(Path.cwd())
+    except Exception:
+        initial_folder = str(Path.cwd())
+
+    filename = sg.popup_get_file('Select experiments CSV', file_types=(('CSV Files', '*.csv'),), initial_folder=initial_folder)
+    if filename:
+        new_path = Path(filename)
+        window['experiments_path'].update(str(new_path))
+        sg.popup(f'Using experiments file:\n{new_path}')
+        return new_path
+
+    return current_path
+
+
+def handle_confirm_line(values, window, state: ExperimentState, experiments_path: Path):
     """Handle the Confirm Line button event."""
     line_str = values.get('line_number')
     try:
@@ -270,7 +288,7 @@ def handle_confirm_line(values, window, state: ExperimentState):
         return
 
     try:
-        exp_path = Path(EXPERIMENTS)
+        exp_path = Path(experiments_path)
         df_exp = pd.read_csv(exp_path)
         if line_idx >= len(df_exp):
             sg.popup_error('Line number out of range')
@@ -383,6 +401,8 @@ def main():
     layout = create_layout()
     window = sg.Window('Data Acquisition', layout)
     state = ExperimentState()
+    # Track the experiments CSV file in use (defaults to configured EXPERIMENTS)
+    current_experiments: Path = Path(EXPERIMENTS)
 
     while True:
         event, values = window.read()
@@ -390,7 +410,9 @@ def main():
         if event == sg.WINDOW_CLOSED or event == 'Exit':
             break
         elif event == 'Confirm Line':
-            handle_confirm_line(values, window, state)
+            handle_confirm_line(values, window, state, current_experiments)
+        elif event == 'change_csv':
+            current_experiments = change_experiments_file(window, current_experiments)
         elif event == 'Launch Bonsai':
             handle_launch_bonsai(values, window, state)
         elif event == 'open_output_folder':
