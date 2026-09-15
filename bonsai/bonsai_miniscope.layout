@@ -4,12 +4,12 @@
     <NestedLayout>
       <WindowSettings Index="3">
         <Location>
-          <X>1541</X>
-          <Y>56</Y>
+          <X>1193</X>
+          <Y>140</Y>
         </Location>
         <Size>
-          <Width>191</Width>
-          <Height>138</Height>
+          <Width>231</Width>
+          <Height>163</Height>
         </Size>
         <VisualizerTypeName>Bonsai.Gui.ButtonVisualizer</VisualizerTypeName>
         <VisualizerSettings>
@@ -20,39 +20,39 @@
   </WindowSettings>
   <WindowSettings Index="29">
     <NestedLayout>
-      <WindowSettings Index="45">
+      <WindowSettings Index="44">
         <Location>
-          <X>1316</X>
-          <Y>649</Y>
+          <X>1189</X>
+          <Y>802</Y>
         </Location>
         <Size>
-          <Width>450</Width>
-          <Height>139</Height>
+          <Width>493</Width>
+          <Height>160</Height>
         </Size>
         <VisualizerTypeName>Bonsai.Gui.GroupBoxVisualizer</VisualizerTypeName>
         <VisualizerSettings>
           <GroupBoxVisualizer>
             <MashupSettings>
-              <Source>41</Source>
+              <Source>40</Source>
               <VisualizerTypeName>Bonsai.Gui.TableLayoutPanelVisualizer</VisualizerTypeName>
               <VisualizerSettings>
                 <TableLayoutPanelVisualizer>
                   <MashupSettings>
-                    <Source>37</Source>
+                    <Source>36</Source>
                     <VisualizerTypeName>Bonsai.Gui.ButtonVisualizer</VisualizerTypeName>
                     <VisualizerSettings>
                       <ButtonVisualizer />
                     </VisualizerSettings>
                   </MashupSettings>
                   <MashupSettings>
-                    <Source>19</Source>
+                    <Source>18</Source>
                     <VisualizerTypeName>Bonsai.Gui.TextBoxVisualizer</VisualizerTypeName>
                     <VisualizerSettings>
                       <TextBoxVisualizer />
                     </VisualizerSettings>
                   </MashupSettings>
                   <MashupSettings>
-                    <Source>21</Source>
+                    <Source>20</Source>
                     <VisualizerTypeName>Bonsai.Gui.ButtonVisualizer</VisualizerTypeName>
                     <VisualizerSettings>
                       <ButtonVisualizer />
@@ -68,12 +68,12 @@
   </WindowSettings>
   <WindowSettings Index="30">
     <Location>
-      <X>1362</X>
-      <Y>220</Y>
+      <X>1204</X>
+      <Y>307</Y>
     </Location>
     <Size>
       <Width>366</Width>
-      <Height>427</Height>
+      <Height>489</Height>
     </Size>
     <VisualizerTypeName>Bonsai.Gui.PropertyGridVisualizer</VisualizerTypeName>
     <VisualizerSettings>
@@ -84,12 +84,12 @@
     <NestedLayout>
       <WindowSettings Index="16">
         <Location>
-          <X>752</X>
-          <Y>413</Y>
+          <X>698</X>
+          <Y>540</Y>
         </Location>
         <Size>
-          <Width>534</Width>
-          <Height>490</Height>
+          <Width>485</Width>
+          <Height>426</Height>
         </Size>
         <VisualizerTypeName>Bonsai.Gui.GroupBoxVisualizer</VisualizerTypeName>
         <VisualizerSettings>
@@ -112,12 +112,12 @@
         <NestedLayout>
           <WindowSettings Index="19">
             <Location>
-              <X>79</X>
-              <Y>212</Y>
+              <X>143</X>
+              <Y>146</Y>
             </Location>
             <Size>
-              <Width>652</Width>
-              <Height>722</Height>
+              <Width>566</Width>
+              <Height>713</Height>
             </Size>
             <VisualizerTypeName>Bonsai.Gui.TableLayoutPanelVisualizer</VisualizerTypeName>
             <VisualizerSettings>

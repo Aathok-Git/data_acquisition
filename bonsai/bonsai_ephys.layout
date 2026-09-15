@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <VisualizerLayout Version="2.9.0">
-  <WindowSettings Index="26">
+  <WindowSettings Index="28">
     <NestedLayout>
       <WindowSettings Index="3">
         <Location>
-          <X>1255</X>
-          <Y>56</Y>
+          <X>1322</X>
+          <Y>143</Y>
         </Location>
         <Size>
-          <Width>206</Width>
-          <Height>188</Height>
+          <Width>223</Width>
+          <Height>164</Height>
         </Size>
         <VisualizerTypeName>Bonsai.Gui.ButtonVisualizer</VisualizerTypeName>
         <VisualizerSettings>
@@ -18,16 +18,16 @@
       </WindowSettings>
     </NestedLayout>
   </WindowSettings>
-  <WindowSettings Index="27">
+  <WindowSettings Index="29">
     <NestedLayout>
       <WindowSettings Index="44">
         <Location>
-          <X>1214</X>
-          <Y>756</Y>
+          <X>1299</X>
+          <Y>751</Y>
         </Location>
         <Size>
-          <Width>477</Width>
-          <Height>171</Height>
+          <Width>459</Width>
+          <Height>133</Height>
         </Size>
         <VisualizerTypeName>Bonsai.Gui.GroupBoxVisualizer</VisualizerTypeName>
         <VisualizerSettings>
@@ -66,30 +66,30 @@
       </WindowSettings>
     </NestedLayout>
   </WindowSettings>
-  <WindowSettings Index="28">
+  <WindowSettings Index="30">
     <Location>
-      <X>1257</X>
-      <Y>250</Y>
+      <X>1330</X>
+      <Y>327</Y>
     </Location>
     <Size>
       <Width>366</Width>
-      <Height>489</Height>
+      <Height>418</Height>
     </Size>
     <VisualizerTypeName>Bonsai.Gui.PropertyGridVisualizer</VisualizerTypeName>
     <VisualizerSettings>
       <PropertyGridVisualizer />
     </VisualizerSettings>
   </WindowSettings>
-  <WindowSettings Index="29">
+  <WindowSettings Index="31">
     <NestedLayout>
       <WindowSettings Index="16">
         <Location>
-          <X>710</X>
-          <Y>308</Y>
+          <X>871</X>
+          <Y>382</Y>
         </Location>
         <Size>
-          <Width>505</Width>
-          <Height>472</Height>
+          <Width>439</Width>
+          <Height>364</Height>
         </Size>
         <VisualizerTypeName>Bonsai.Gui.GroupBoxVisualizer</VisualizerTypeName>
         <VisualizerSettings>
@@ -106,93 +106,67 @@
       </WindowSettings>
     </NestedLayout>
   </WindowSettings>
-  <WindowSettings Index="34">
+  <WindowSettings Index="40">
     <NestedLayout>
-      <WindowSettings Index="53">
+      <WindowSettings Index="4">
         <NestedLayout>
-          <WindowSettings Index="24">
+          <WindowSettings Index="25">
             <Location>
-              <X>94</X>
-              <Y>130</Y>
+              <X>137</X>
+              <Y>199</Y>
             </Location>
             <Size>
-              <Width>569</Width>
-              <Height>758</Height>
+              <Width>698</Width>
+              <Height>628</Height>
             </Size>
-            <VisualizerTypeName>Bonsai.Gui.TableLayoutPanelVisualizer</VisualizerTypeName>
+            <VisualizerTypeName>Bonsai.Gui.TabControlVisualizer</VisualizerTypeName>
             <VisualizerSettings>
-              <TableLayoutPanelVisualizer>
+              <TabControlVisualizer>
                 <MashupSettings>
-                  <Source>11</Source>
-                  <VisualizerTypeName>Bonsai.Gui.TableLayoutPanelVisualizer</VisualizerTypeName>
+                  <Source>18</Source>
+                  <VisualizerTypeName>Bonsai.Gui.GroupBoxVisualizer</VisualizerTypeName>
                   <VisualizerSettings>
-                    <TableLayoutPanelVisualizer>
+                    <GroupBoxVisualizer>
                       <MashupSettings>
-                        <Source>0</Source>
-                        <VisualizerTypeName>Bonsai.Design.ObjectTextVisualizer</VisualizerTypeName>
+                        <Source>16</Source>
+                        <VisualizerTypeName>Bonsai.Ephys.Design.WaveformVisualizer</VisualizerTypeName>
                         <VisualizerSettings>
-                          <ObjectTextVisualizer />
+                          <WaveformVisualizer>
+                            <ColorTheme>Light</ColorTheme>
+                            <ChannelHeight>20</ChannelHeight>
+                            <Timebase>2</Timebase>
+                            <ColorGrouping>1</ColorGrouping>
+                            <UseFixedRange>false</UseFixedRange>
+                            <RangeAmplitude>0</RangeAmplitude>
+                          </WaveformVisualizer>
                         </VisualizerSettings>
                       </MashupSettings>
-                      <MashupSettings>
-                        <Source>9</Source>
-                        <VisualizerTypeName>Bonsai.Dsp.Design.MatVisualizer</VisualizerTypeName>
-                        <VisualizerSettings>
-                          <MatVisualizer>
-                            <XMin>0</XMin>
-                            <XMax>100</XMax>
-                            <YMin>1.78</YMin>
-                            <YMax>1.84</YMax>
-                            <AutoScaleX>true</AutoScaleX>
-                            <AutoScaleY>true</AutoScaleY>
-                            <SelectedPage>0</SelectedPage>
-                            <ChannelsPerPage>16</ChannelsPerPage>
-                            <OverlayChannels>true</OverlayChannels>
-                            <ChannelOffset>0</ChannelOffset>
-                            <HistoryLength>1</HistoryLength>
-                            <WaveformBufferLength>1</WaveformBufferLength>
-                          </MatVisualizer>
-                        </VisualizerSettings>
-                      </MashupSettings>
-                    </TableLayoutPanelVisualizer>
+                    </GroupBoxVisualizer>
                   </VisualizerSettings>
                 </MashupSettings>
                 <MashupSettings>
-                  <Source>22</Source>
-                  <VisualizerTypeName>Bonsai.Gui.TableLayoutPanelVisualizer</VisualizerTypeName>
+                  <Source>23</Source>
+                  <VisualizerTypeName>Bonsai.Gui.GroupBoxVisualizer</VisualizerTypeName>
                   <VisualizerSettings>
-                    <TableLayoutPanelVisualizer>
+                    <GroupBoxVisualizer>
                       <MashupSettings>
-                        <Source>13</Source>
-                        <VisualizerTypeName>Bonsai.Design.ObjectTextVisualizer</VisualizerTypeName>
+                        <Source>21</Source>
+                        <VisualizerTypeName>Bonsai.Ephys.Design.WaveformVisualizer</VisualizerTypeName>
                         <VisualizerSettings>
-                          <ObjectTextVisualizer />
+                          <WaveformVisualizer>
+                            <ColorTheme>Light</ColorTheme>
+                            <ChannelHeight>20</ChannelHeight>
+                            <Timebase>2</Timebase>
+                            <ColorGrouping>1</ColorGrouping>
+                            <UseFixedRange>false</UseFixedRange>
+                            <RangeAmplitude>0</RangeAmplitude>
+                          </WaveformVisualizer>
                         </VisualizerSettings>
                       </MashupSettings>
-                      <MashupSettings>
-                        <Source>20</Source>
-                        <VisualizerTypeName>Bonsai.Dsp.Design.MatVisualizer</VisualizerTypeName>
-                        <VisualizerSettings>
-                          <MatVisualizer>
-                            <XMin>0</XMin>
-                            <XMax>100</XMax>
-                            <YMin>0.18</YMin>
-                            <YMax>0.186</YMax>
-                            <AutoScaleX>true</AutoScaleX>
-                            <AutoScaleY>true</AutoScaleY>
-                            <SelectedPage>0</SelectedPage>
-                            <ChannelsPerPage>16</ChannelsPerPage>
-                            <OverlayChannels>true</OverlayChannels>
-                            <ChannelOffset>0</ChannelOffset>
-                            <HistoryLength>1</HistoryLength>
-                            <WaveformBufferLength>1</WaveformBufferLength>
-                          </MatVisualizer>
-                        </VisualizerSettings>
-                      </MashupSettings>
-                    </TableLayoutPanelVisualizer>
+                    </GroupBoxVisualizer>
                   </VisualizerSettings>
                 </MashupSettings>
-              </TableLayoutPanelVisualizer>
+              </TabControlVisualizer>
             </VisualizerSettings>
           </WindowSettings>
         </NestedLayout>

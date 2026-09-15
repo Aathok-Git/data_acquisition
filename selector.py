@@ -9,7 +9,7 @@ import serial
 import time
 
 # ========== CONFIGURATION ==========
-TESTING_MODE_SKIP_EXPERIMENT_CHECK = False
+TESTING_MODE_SKIP_EXPERIMENT_CHECK = False # Set to True to skip experiment confirmation check for testing
 # ====================================
 
 # Constants
