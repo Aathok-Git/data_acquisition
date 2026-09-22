@@ -106,29 +106,29 @@
       </WindowSettings>
     </NestedLayout>
   </WindowSettings>
-  <WindowSettings Index="40">
+  <WindowSettings Index="41">
     <NestedLayout>
-      <WindowSettings Index="4">
+      <WindowSettings Index="5">
         <NestedLayout>
-          <WindowSettings Index="25">
+          <WindowSettings Index="27">
             <Location>
-              <X>137</X>
-              <Y>199</Y>
+              <X>234</X>
+              <Y>234</Y>
             </Location>
             <Size>
-              <Width>698</Width>
-              <Height>628</Height>
+              <Width>510</Width>
+              <Height>569</Height>
             </Size>
             <VisualizerTypeName>Bonsai.Gui.TabControlVisualizer</VisualizerTypeName>
             <VisualizerSettings>
               <TabControlVisualizer>
                 <MashupSettings>
-                  <Source>18</Source>
+                  <Source>19</Source>
                   <VisualizerTypeName>Bonsai.Gui.GroupBoxVisualizer</VisualizerTypeName>
                   <VisualizerSettings>
                     <GroupBoxVisualizer>
                       <MashupSettings>
-                        <Source>16</Source>
+                        <Source>17</Source>
                         <VisualizerTypeName>Bonsai.Ephys.Design.WaveformVisualizer</VisualizerTypeName>
                         <VisualizerSettings>
                           <WaveformVisualizer>
@@ -145,12 +145,12 @@
                   </VisualizerSettings>
                 </MashupSettings>
                 <MashupSettings>
-                  <Source>23</Source>
+                  <Source>25</Source>
                   <VisualizerTypeName>Bonsai.Gui.GroupBoxVisualizer</VisualizerTypeName>
                   <VisualizerSettings>
                     <GroupBoxVisualizer>
                       <MashupSettings>
-                        <Source>21</Source>
+                        <Source>23</Source>
                         <VisualizerTypeName>Bonsai.Ephys.Design.WaveformVisualizer</VisualizerTypeName>
                         <VisualizerSettings>
                           <WaveformVisualizer>
