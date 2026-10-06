@@ -17,6 +17,8 @@ COM_PORT = 'COM4'
 BAUD_RATE = 115200
 SERIAL_TIMEOUT = 2
 SCRIPTS_DIR = Path(__file__).parent / 'scripts'
+DEFAULT_EPHYS_CHANNELS = '0,1,2,3,4,5,6,7'
+VALID_EPHYS_CHANNELS = set(range(32))
 
 
 class ExperimentState:
@@ -27,6 +29,7 @@ class ExperimentState:
         self.rat_name = None
         self.infusion_rate = None
         self.total_systemic_time = None
+        self.ephys_channels = DEFAULT_EPHYS_CHANNELS
 
     def is_confirmed(self):
         return self.line_number is not None
@@ -36,12 +39,14 @@ class ExperimentState:
         self.rat_name = None
         self.infusion_rate = None
         self.total_systemic_time = None
+        self.ephys_channels = DEFAULT_EPHYS_CHANNELS
 
-    def confirm(self, line_number, rat_name, infusion_rate, total_time):
+    def confirm(self, line_number, rat_name, infusion_rate, total_time, ephys_channels=None):
         self.line_number = line_number
         self.rat_name = rat_name
         self.infusion_rate = infusion_rate
         self.total_systemic_time = total_time
+        self.ephys_channels = ephys_channels or DEFAULT_EPHYS_CHANNELS
 
 
 def generate_bonsai_script_name(ephys: bool, miniscope: bool, analog_inputs: bool,
@@ -91,6 +96,58 @@ def parse_float(value) -> float | None:
         return None if pd.isna(result) else result
     except (TypeError, ValueError):
         return None
+
+
+def parse_ephys_channels(value) -> str:
+    """Normalize and validate an ephys channel list from CSV or GUI input."""
+    if value is None or (isinstance(value, float) and pd.isna(value)):
+        return DEFAULT_EPHYS_CHANNELS
+
+    raw = str(value).strip()
+    if raw == '' or raw.lower() in {'none', 'nan', 'null'}:
+        return DEFAULT_EPHYS_CHANNELS
+
+    if re.fullmatch(r'\d+\s*-\s*\d+', raw):
+        start, end = [int(part.strip()) for part in raw.split('-', 1)]
+        if start > end:
+            start, end = end, start
+        channels = list(range(start, end + 1))
+        raw = ','.join(str(ch) for ch in channels)
+
+    parts = [part.strip() for part in raw.split(',') if part.strip()]
+    if not parts:
+        return DEFAULT_EPHYS_CHANNELS
+
+    normalized = []
+    seen = set()
+    for part in parts:
+        try:
+            channel = int(part)
+        except ValueError as exc:
+            raise ValueError(f"Invalid ephys channel '{part}'. Use integer values from 0 to 7 separated by commas.") from exc
+
+        if channel not in VALID_EPHYS_CHANNELS:
+            raise ValueError(f"Channel {channel} is out of range. Valid channels are 0 through 31.")
+        if channel not in seen:
+            seen.add(channel)
+            normalized.append(str(channel))
+
+    return ','.join(normalized)
+
+
+def get_ephys_channels_for_row(row: pd.Series) -> str:
+    """Read the ephys-channel category from a CSV row, using the default if missing."""
+    if row is None:
+        return DEFAULT_EPHYS_CHANNELS
+
+    normalized_columns = {
+        re.sub(r'[^a-z0-9]', '', str(column).lower()): column for column in row.index
+    }
+    column_name = normalized_columns.get('ephyschannels')
+    if column_name is None:
+        return DEFAULT_EPHYS_CHANNELS
+
+    return parse_ephys_channels(row.get(column_name, DEFAULT_EPHYS_CHANNELS))
 
 
 def calculate_infusion_rate(row: pd.Series) -> float | None:
@@ -230,7 +287,6 @@ def create_layout():
         [sg.Text('Select Optional Modules:', font=('Helvetica', 12, 'bold'))],
         [sg.Checkbox('Analog Inputs', key='analog_inputs'), sg.Checkbox('Syringe Use', key='syringe_use')],
 
-        
         [sg.Multiline(size=(50, 8), key='data_display', disabled=True)],
 
         [sg.Text('Experiment selection:', font=('Helvetica', 12, 'bold'))],
@@ -302,6 +358,8 @@ def handle_confirm_line(values, window, state: ExperimentState, experiments_path
         has_valid_rate = infusion_rate is not None and not pd.isna(infusion_rate)
         infusion_text = f'{infusion_rate:.3f}' if has_valid_rate else 'No drug'
 
+        ephys_channels = get_ephys_channels_for_row(row)
+
         # Extract total systemic time
         total_systemic_time_sec = None
         if has_valid_rate:
@@ -316,7 +374,7 @@ def handle_confirm_line(values, window, state: ExperimentState, experiments_path
                                         text_color='green' if has_valid_rate else 'orange')
 
         # Confirm the experiment
-        state.confirm(line_idx + 1, str(rat_name), infusion_rate, total_systemic_time_sec)
+        state.confirm(line_idx + 1, str(rat_name), infusion_rate, total_systemic_time_sec, ephys_channels)
         window['confirmed_status'].update(f'Confirmed Line: {state.line_number}', text_color='green')
 
         # Handle syringe checkbox
@@ -388,7 +446,10 @@ def handle_launch_bonsai(values, window, state: ExperimentState):
     try:
         base_path = str(OUTPUT_DIR)
         rat_name = state.rat_name or 'test'
-        subprocess.run([str(script_path), base_path, rat_name], check=True)
+        launch_args = [str(script_path), base_path, rat_name]
+        if values.get('ephys', False):
+            launch_args.append(state.ephys_channels)
+        subprocess.run(launch_args, check=True)
         sg.popup('Bonsai launched successfully')
     except Exception as e:
         sg.popup_error(f'Error launching Bonsai: {e}')

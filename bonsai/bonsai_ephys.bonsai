@@ -532,7 +532,7 @@
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>..\data\experiment_results\test\2026-9-22\17-3-3\Initialized-time.csv</io:FileName>
+              <io:FileName>..\data\experiment_results\test\2026-9-29\14-31-31\Initialized-time.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
@@ -700,7 +700,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="dsp:MatrixWriter">
-                <dsp:Path>..\data\experiment_results\test\2026-9-22\17-3-3\digital-pins.raw</dsp:Path>
+                <dsp:Path>..\data\experiment_results\test\2026-9-29\14-31-31\digital-pins.raw</dsp:Path>
                 <dsp:Suffix>FileCount</dsp:Suffix>
                 <dsp:Overwrite>false</dsp:Overwrite>
                 <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -734,7 +734,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="dsp:MatrixWriter">
-                <dsp:Path>..\data\experiment_results\test\2026-9-22\17-3-3\digital-buttons.raw</dsp:Path>
+                <dsp:Path>..\data\experiment_results\test\2026-9-29\14-31-31\digital-buttons.raw</dsp:Path>
                 <dsp:Suffix>FileCount</dsp:Suffix>
                 <dsp:Overwrite>false</dsp:Overwrite>
                 <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -768,7 +768,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="dsp:MatrixWriter">
-                <dsp:Path>..\data\experiment_results\test\2026-9-22\17-3-3\digital-clock.raw</dsp:Path>
+                <dsp:Path>..\data\experiment_results\test\2026-9-29\14-31-31\digital-clock.raw</dsp:Path>
                 <dsp:Suffix>FileCount</dsp:Suffix>
                 <dsp:Overwrite>false</dsp:Overwrite>
                 <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -809,7 +809,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="dsp:MatrixWriter">
-                <dsp:Path>..\data\experiment_results\test\2026-9-22\17-3-3\analog-clock.raw</dsp:Path>
+                <dsp:Path>..\data\experiment_results\test\2026-9-29\14-31-31\analog-clock.raw</dsp:Path>
                 <dsp:Suffix>FileCount</dsp:Suffix>
                 <dsp:Overwrite>false</dsp:Overwrite>
                 <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -843,7 +843,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="dsp:MatrixWriter">
-                <dsp:Path>..\data\experiment_results\test\2026-9-22\17-3-3\analog-data.raw</dsp:Path>
+                <dsp:Path>..\data\experiment_results\test\2026-9-29\14-31-31\analog-data.raw</dsp:Path>
                 <dsp:Suffix>FileCount</dsp:Suffix>
                 <dsp:Overwrite>false</dsp:Overwrite>
                 <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -878,7 +878,7 @@
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>..\data\experiment_results\test\2026-9-22\17-3-3\harp-sync.csv</io:FileName>
+              <io:FileName>..\data\experiment_results\test\2026-9-29\14-31-31\harp-sync.csv</io:FileName>
               <io:Append>true</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
@@ -914,7 +914,7 @@
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>..\data\experiment_results\test\2026-9-22\17-3-3\output-clock.csv</io:FileName>
+              <io:FileName>..\data\experiment_results\test\2026-9-29\14-31-31\output-clock.csv</io:FileName>
               <io:Append>true</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>None</io:Suffix>
@@ -1037,7 +1037,7 @@
         <Property Name="EphysChannels" />
       </Expression>
       <Expression xsi:type="IncludeWorkflow" Path="Extensions\HeadstageDataSubworkflow.bonsai">
-        <EphysChannels>0,1,2,3,4,5,6,7</EphysChannels>
+        <EphysChannels>0,1,2,3,4,5,6,7ad</EphysChannels>
       </Expression>
     </Nodes>
     <Edges>
