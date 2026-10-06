@@ -13,7 +13,7 @@ The logger could use the following improvements:
 
 ## Ephys
 - Bonsai files must be built for all combinations
-- hitting enter on the configureheadstage node pulls up a gui with a lot of options, I don't think it is accessible from anywhere other than the editor. Not sure what to do about that yet
+
 
 ## Visualizers
 - Rebuilding the visualizer every time the node count changes is really annoying. Try to see if there is a better way.

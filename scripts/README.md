@@ -15,9 +15,9 @@ If you see an error about needing to run `conda init`, the setup script will han
 
 ## Naming Convention
 
-Batch files follow a naming pattern based on which modules are selected:
+Batch files follow the module-selection naming pattern:
 
-```
+```text
 bonsai_[module1]_[module2]_[module3]....bat
 ```
 
